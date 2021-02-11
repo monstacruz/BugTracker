@@ -13,6 +13,9 @@ public class Project {
     private String name;
     private LocalDate startDate;
     private String description;
+
+    @OneToOne
+    @JoinColumn(name="member_id", unique = true)
     private Member projectLead;
 
     @OneToMany(mappedBy="project")
