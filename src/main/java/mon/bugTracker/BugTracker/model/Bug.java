@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Bug {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description, severity;
     private LocalDate startDate;
@@ -16,15 +16,20 @@ public class Bug {
     @JoinColumn(name = "project_id")
     private Project project;
 
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public Bug(){
     }
 
-    public Bug(Long id, String description, String severity, LocalDate startDate, Project project) {
+    public Bug(Long id, String description, String severity, LocalDate startDate, Project project, Member member) {
         this.id = id;
         this.description = description;
         this.severity = severity;
         this.startDate = startDate;
         this.project = project;
+        this.member = member;
     }
 
     public Long getId() {
@@ -65,5 +70,13 @@ public class Bug {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }

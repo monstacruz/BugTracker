@@ -8,14 +8,14 @@ import java.util.Set;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private LocalDate startDate;
     private String description;
 
     @OneToOne
-    @JoinColumn(name="member_id", unique = true)
+    @JoinColumn(name="projectLeadId", unique = true)
     private Member projectLead;
 
     @OneToMany(mappedBy="project")
