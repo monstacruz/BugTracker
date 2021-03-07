@@ -9,6 +9,8 @@ public interface ProjectService {
 
     Project findById(Long id);
 
+    Project findByProjectLeadId(Long id);
+
     Set<Project> getProjects();
 
     Project createProject(Project project);
@@ -16,4 +18,5 @@ public interface ProjectService {
     void assignProjectLead(Member lead);
 
     void assignMember(Project project, Member member);
+
 }

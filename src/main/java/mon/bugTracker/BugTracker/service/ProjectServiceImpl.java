@@ -36,6 +36,11 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public Project findByProjectLeadId(Long id) {
+        return projectRepository.findByProjectLeadId(id).get();
+    }
+
+    @Override
     public Set<Project> getProjects() {
         Set<Project> projects = new HashSet<>();
 
@@ -66,4 +71,5 @@ public class ProjectServiceImpl implements ProjectService{
 
         memberService.assignProject(member, project);
     }
+
 }

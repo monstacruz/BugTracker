@@ -50,15 +50,32 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member createMember(Member member) {
-        memberRepository.save(member);
+    public Member createOrUpdateMember(Member member) {
+        //check to see if member belongs in other projects(as a previous project lead), remove project lead if found
+        if (projectRepository.findByProjectLeadId(member.getId()).isPresent()){
+            projectRepository.findByProjectLeadId(member.getId()).get().setProjectLead(null);
+        }
 
+        memberRepository.save(member);
         return member;
+    }
+
+    @Override
+    public Member updateMember(Member member) {
+        return null;
     }
 
     @Override
     public void assignProject(Member member, Project project) {
         member.setProject(projectRepository.findById(project.getId()).get());
         memberRepository.save(member);
+    }
+
+    @Override
+    public Set<Member> getFreeMembers() {
+        Set<Member> members = new HashSet<>();
+
+        memberRepository.findByProjectId(null).iterator().forEachRemaining(members::add);
+        return members;
     }
 }

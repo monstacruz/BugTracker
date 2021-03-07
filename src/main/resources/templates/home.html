@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A bug tracker">
+    <meta name="author" content="Mon Clarence Santa cruz">
+    <title>Mon's bug tracker</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/simple-sidebar.css">
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Mon's Bug tracker</div>
+        <div class="list-group list-group-flush">
+            <a href="/home" class="list-group-item list-group-item-action active">Home</a>
+            <a href="/bugs" class="list-group-item list-group-item-action bg-light">Bugs</a>
+            <a href="/projects" class="list-group-item list-group-item-action bg-light">Projects</a>
+            <a href="/members" class="list-group-item list-group-item-action bg-light">Members</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">My Profile</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Log Out</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Main Menu</button>
+        </nav>
+
+        <div class="container-fluid">
+            <h1 class="mt-4">Simple Bug Tracker</h1>
+            <p>This simple web application is designed to track bugs within projects</p>
+            <p>This application is built on the spring framework. Using MVC architecture, this project utilizes several
+                layers in order to preserve the SOLID foundations of object oriented programming</p>
+            <p>Data is persisted into a *** database</p>
+            <p>To login as a guest, please <a href="/guest">click here</a></p>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+</body>
+
+</html>

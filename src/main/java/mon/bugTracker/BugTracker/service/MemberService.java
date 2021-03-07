@@ -11,9 +11,13 @@ public interface MemberService {
 
     Set<Member> getMembers();
 
+    Set<Member> getFreeMembers();
+
     Set<Member> findByProjectId(Long id);
 
-    Member createMember(Member member);
+    Member createOrUpdateMember(Member member);
+
+    Member updateMember(Member member);
 
     void assignProject(Member member, Project project);
 }

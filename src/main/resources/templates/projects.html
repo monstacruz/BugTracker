@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A bug tracker">
+    <meta name="author" content="Mon Clarence Santa cruz">
+    <title>Projects</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/simple-sidebar.css">
+    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Mon's Bug tracker</div>
+        <div class="list-group list-group-flush">
+            <a href="/home" class="list-group-item list-group-item-action bg-light">Home</a>
+            <a href="/bugs" class="list-group-item list-group-item-action bg-light">Bugs</a>
+            <a href="/projects" class="list-group-item list-group-item-action active">Projects</a>
+            <a href="/members" class="list-group-item list-group-item-action bg-light">Members</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">My Profile</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Log Out</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Main Menu</button>
+        </nav>
+
+        <div class="container-fluid">
+            <h1 class="mt-4">Projects</h1><br>
+            <div th:each="project:${projects}"
+                 th:onClick="'javascript:rowClicked(' + ${project.id} + ');'"
+                 class="list-group-item-action" style="cursor:pointer">
+                <h2 th:text="${project.name}"></h2>
+                <table class="table">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                    <tr th:each="member:${project.projectMembers}">
+                        <td th:text="${member.firstName}"></td>
+                        <td th:text="${member.lastName}"></td>
+                        <td th:text="${member.email}"></td>
+                        <td th:text="${project.projectLead != null && project.projectLead.getId == member.getId} ? 'Project Lead' : 'Member'"></td>
+                    </tr>
+                </table>
+            </div>
+            <button class="btn btn-primary right" id="make-project" onclick="location.href='/add-project';">New Project</button>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    function rowClicked(value){
+        location.href = 'projects/' + value;
+    }
+</script>
+
+</body>
+
+</html>
