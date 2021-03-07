@@ -52,11 +52,13 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member createOrUpdateMember(Member member) {
         //check to see if member belongs in other projects(as a previous project lead), remove project lead if found
+        System.out.println(member.getId());
+        memberRepository.save(member);
+        System.out.println(member.getId());
         if (projectRepository.findByProjectLeadId(member.getId()).isPresent()){
             projectRepository.findByProjectLeadId(member.getId()).get().setProjectLead(null);
         }
 
-        memberRepository.save(member);
         return member;
     }
 

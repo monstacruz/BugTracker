@@ -46,6 +46,9 @@
                 <label>Name</label>
                 <input type="text" class="form-control" th:field="*{name}"/>
 
+                <label>Start Date</label>
+                <input type="date" class="form-control" th:field="*{startDate}"/>
+
                 <label>Description</label>
                 <input type="text" class="form-control" th:field="*{description}"/>
 
@@ -56,6 +59,7 @@
                             th:value="${member.id}"
                             th:text="${member.firstName + ' ' + member.lastName}"></option>
                 </select>
+
                 <button type="submit" class="btn btn-primary right" id="create-project">Submit</button>
             </form>
         </div>

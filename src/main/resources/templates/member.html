@@ -52,10 +52,11 @@
 
                 <label>Project</label>
                 <select class="form-control" th:field="*{project}">
+                    <option value="">No Project</option>
                     <option th:each="project:${projects}"
                             th:value="${project.id}"
                             th:text="${project.name}"
-                            th:selected="${member.project.id == project.id}"></option>
+                            th:selected="${member.project != null && member.project.id == project.id}"></option>
                 </select>
                 <button type="submit" class="btn btn-primary right" id="update-member">Update</button>
             </form>

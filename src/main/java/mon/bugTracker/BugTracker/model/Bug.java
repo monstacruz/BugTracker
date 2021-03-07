@@ -1,5 +1,7 @@
 package mon.bugTracker.BugTracker.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,6 +12,7 @@ public class Bug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description, severity;
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private LocalDate startDate;
 
     @ManyToOne
