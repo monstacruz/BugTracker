@@ -42,7 +42,23 @@
 
         <div class="container-fluid">
             <h1 class="mt-4">Bugs</h1>
-
+            <table class="table">
+                <tr>
+                    <th>Project</th>
+                    <th>Description</th>
+                    <th>Status/Severity</th>
+                    <th>Assigned to</th>
+                    <th>Reported at: </th>
+                </tr>
+                <tr th:each="bug:${bugs}" class="list-group-item-action" style="cursor:pointer"
+                    th:onClick="'javascript:rowClicked(' + ${bug.id} + ');'">
+                    <td th:text="${bug.project.name}"></td>
+                    <td th:text="${bug.description}"></td>
+                    <td th:text="${bug.severityString}"></td>
+                    <td th:text="${bug.member.firstName + ' ' + bug.member.lastName}"></td>
+                    <td th:text="${bug.startDate}"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -60,6 +76,10 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+    function rowClicked(value){
+        location.href = 'bugs/' + value;
+    }
 </script>
 
 </body>

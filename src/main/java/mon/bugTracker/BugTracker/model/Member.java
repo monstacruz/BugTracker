@@ -14,6 +14,7 @@ public class Member {
     @JoinColumn(name = "project_id")
     private Project project;
 
+
     public Member(){
     }
 
@@ -64,4 +65,6 @@ public class Member {
     public void setProject(Project project) {
         this.project = project;
     }
+
+
 }

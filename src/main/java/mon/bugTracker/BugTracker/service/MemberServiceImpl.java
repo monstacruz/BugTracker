@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -34,9 +35,7 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Set<Member> getMembers() {
         Set<Member> members = new HashSet<>();
-
         memberRepository.findAll().iterator().forEachRemaining(members::add);
-
         return members;
     }
 

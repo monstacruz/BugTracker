@@ -6,3 +6,5 @@ INSERT INTO member(first_name, last_name, email, project_id) VALUES ('Sam', 'Gre
 
 UPDATE project SET project_lead_id = 1 WHERE id = 1;
 UPDATE project SET project_lead_id = 2 WHERE id = 2;
+
+INSERT INTO bug(description, severity, severity_string, project_id, member_id) VALUES ('No Sound', 3, 'High', 2, 2);

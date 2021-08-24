@@ -2,6 +2,7 @@ package mon.bugTracker.BugTracker.controller;
 
 import mon.bugTracker.BugTracker.model.Member;
 import mon.bugTracker.BugTracker.model.Project;
+import mon.bugTracker.BugTracker.service.BugService;
 import mon.bugTracker.BugTracker.service.MemberService;
 import mon.bugTracker.BugTracker.service.ProjectService;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ public class ProjectController {
 
     private final ProjectService projectService;
     private final MemberService memberService;
+    private final BugService bugService;
 
-    public ProjectController(ProjectService projectService, MemberService memberService) {
+    public ProjectController(ProjectService projectService, MemberService memberService, BugService bugService) {
         this.projectService = projectService;
         this.memberService = memberService;
+        this.bugService = bugService;
     }
 
     @RequestMapping("/projects")
@@ -32,6 +35,7 @@ public class ProjectController {
     public String getProject(@PathVariable String id, Model model){
         model.addAttribute("project", projectService.findById(Long.parseLong(id)));
         model.addAttribute("members", memberService.findByProjectId(Long.parseLong(id)));
+        model.addAttribute("bugs", bugService.findByProjectId(Long.parseLong(id)));
         return "project";
     }
 

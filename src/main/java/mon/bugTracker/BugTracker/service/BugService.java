@@ -11,7 +11,10 @@ public interface BugService {
 
     Set<Bug> getBugs();
 
-    Bug createBug(Bug bug, Member member);
+    Bug createBug(Bug bug);
 
     Bug changeStatus(Bug bug);
+
+    Set<Bug> findByProjectId(Long id);
+
 }

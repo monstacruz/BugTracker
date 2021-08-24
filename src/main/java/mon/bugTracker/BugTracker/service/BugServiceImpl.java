@@ -18,7 +18,7 @@ public class BugServiceImpl implements BugService{
     private final BugRepository bugRepository;
     private final MemberRepository memberRepository;
     private final ProjectRepository projectRepository;
-
+    private String severityStrings[] = {"Resolved", "Low", "Medium", "High"};
     public BugServiceImpl(BugRepository bugRepository,
                           MemberRepository memberRepository,
                           ProjectRepository projectRepository) {
@@ -46,13 +46,20 @@ public class BugServiceImpl implements BugService{
     }
 
     @Override
-    public Bug createBug(Bug bug, Member member) {
+    public Bug createBug(Bug bug) {
         //add bug to repository
-        bugRepository.save(bug);
+        //bug.setSeverityString(severityStrings[bug.getSeverity()]);
+
+        //assign bug to person
+//        Member tmpMember = memberRepository.findById(member.getId()).get();
+//        tmpMember.setBug(bug);
+//        memberRepository.save(tmpMember);
 
         //assign bug to the project
-        Project tmpProject = projectRepository.findById(member.getProject().getId()).get();
+        Project tmpProject = projectRepository.findById(bug.getMember().getProject().getId()).get();
         tmpProject.getBugs().add(bug);
+        bug.setProject(tmpProject);
+        bugRepository.save(bug);
         projectRepository.save(tmpProject);
 
         return bug;
@@ -60,6 +67,21 @@ public class BugServiceImpl implements BugService{
 
     @Override
     public Bug changeStatus(Bug bug) {
-        return null;
+        Bug tmpBug = bugRepository.findById(bug.getId()).get();
+        tmpBug.setSeverity(0);
+
+        //add bug to repository
+        tmpBug.setSeverityString(severityStrings[0]);
+        bugRepository.save(tmpBug);
+
+        return tmpBug;
     }
+
+    @Override
+    public Set<Bug> findByProjectId(Long id) {
+        Set<Bug> bugs = new HashSet<>();
+        bugRepository.findByProjectId(id).iterator().forEachRemaining(bugs::add);
+        return bugs;
+    }
+
 }

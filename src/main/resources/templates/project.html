@@ -58,7 +58,25 @@
 
                 <label>description</label>
                 <textarea class="form-control" th:field="*{description}" th:value="${project.description}"/>
+
+                <label>Bugs</label>
+                <table class="table">
+                    <tr>
+                        <th>Description</th>
+                        <th>Status/Severity</th>
+                        <th>Assigned to</th>
+                        <th>Reported at:</th>
+                    </tr>
+                    <tr th:each="bug:${bugs}" class="list-group-item-action" style="cursor:pointer"
+                        th:onClick="'javascript:rowClicked(' + ${bug.id} + ');'">
+                        <td th:text="${bug.description}"></td>
+                        <td th:text="${bug.severityString}"></td>
+                        <td th:text="${bug.member.firstName + ' ' + bug.member.lastName}"></td>
+                        <td th:text="${bug.startDate}"></td>
+                    </tr>
+                </table>
                 <button type="submit" class="btn btn-primary right" id="update-project">Update</button>
+                <button type="button" th:onClick="'javascript:createBug(' + ${project.id} + ')'" class="btn btn-primary right">Report a bug</button>
             </form>
 
         </div>
@@ -78,6 +96,14 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+    function rowClicked(value){
+        location.href = '/bugs/' + value;
+    }
+
+    function createBug(value){
+        location.href = '/add-bug/' + value;
+    }
 </script>
 
 </body>

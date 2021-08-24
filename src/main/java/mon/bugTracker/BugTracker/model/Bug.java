@@ -3,6 +3,7 @@ package mon.bugTracker.BugTracker.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.Severity;
 import java.time.LocalDate;
 
 @Entity
@@ -11,22 +12,24 @@ public class Bug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description, severity;
+    private String description, severityString;
+    private int severity;
     @DateTimeFormat(pattern="yyyy-mm-dd")
     private LocalDate startDate;
 
+
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "projectId")
     private Project project;
 
     @OneToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "memberId")
     private Member member;
 
     public Bug(){
     }
 
-    public Bug(Long id, String description, String severity, LocalDate startDate, Project project, Member member) {
+    public Bug(Long id, String description, int severity, LocalDate startDate, Project project, Member member) {
         this.id = id;
         this.description = description;
         this.severity = severity;
@@ -51,11 +54,11 @@ public class Bug {
         this.description = description;
     }
 
-    public String getSeverity() {
+    public int getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(int severity) {
         this.severity = severity;
     }
 
@@ -81,5 +84,13 @@ public class Bug {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public String getSeverityString() {
+        return severityString;
+    }
+
+    public void setSeverityString(String severityString) {
+        this.severityString = severityString;
     }
 }
